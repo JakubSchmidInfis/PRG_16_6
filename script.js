@@ -4,8 +4,8 @@ const nextButton = document.getElementById("button")
 
 var question = 0;
 
-function nextQuestion()
-{
+function nextQuestion(){
+
     question ++;
     questionText = chooseQuestion().split("|")
     answerText = chooseQuestion().split("|")[1]
@@ -14,10 +14,17 @@ function nextQuestion()
 
     alert("Question: " + questionText + " Answer: " + answerText);
 
-
+    writeQuestion(questionText);
 }
 
-function chooseQuestion()
-{
+function writeQuestion(text){
+    const questionItem = document.createElement("h3")
+    questionItem.textContent = text
+    questionItem.classList.add("question")
+    questionDiv.append(questionItem)
+}
+
+function chooseQuestion(){
+
     return "Kolik je 1 + 1? | 2"
 }

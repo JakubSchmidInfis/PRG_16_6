@@ -7,14 +7,21 @@ var question = 0;
 function nextQuestion(){
 
     question ++;
-    questionText = chooseQuestion().split("|")
-    answerText = chooseQuestion().split("|")[1]
+
+    //Assign
+    text = chooseQuestion().split(";")
+    questionText = text[0]
+    answerText = text[1]
+
+    //Cleanup
     answerText = answerText.trim();
-    questionText = questionText[0].trim();
+    questionText = questionText.trim();
 
     alert("Question: " + questionText + " Answer: " + answerText);
 
+    //Přidat elementy do dokumentu
     writeQuestion(questionText);
+    writeAnswer(answerText);
 }
 
 function writeQuestion(text){
@@ -23,8 +30,36 @@ function writeQuestion(text){
     questionItem.classList.add("question")
     questionDiv.append(questionItem)
 }
+function writeAnswer(text){
+
+    let Answers = text.split(",")
+
+    for (i = 0;i<Answers.length;i++)
+    {
+        const answerItem = document.createElement("input")
+        const answerLabel = document.createElement("label")
+        
+        answerItem.id = ("answer" + String(i))
+        answerLabel.htmlFor = ("answer" + String(i))
+
+        answerItem.setAttribute("type", "radio")
+        answerItem.setAttribute("name", "answer")
+        answerLabel.textContent = Answers[i]
+        answerItem.classList.add("answer")
+        answerDiv.append(answerItem)
+        answerDiv.append(answerLabel)
+    }
+    
+
+
+
+    const answerItem = document.createElement("h3")
+    answerItem.textContent = text
+    answerItem.classList.add("answer")
+    answerDiv.append(answerItem)
+}
 
 function chooseQuestion(){
-
-    return "Kolik je 1 + 1? | 2"
+    
+    return "Kolik je 1 + 1? ; 2,5,4,3,5,6 "
 }

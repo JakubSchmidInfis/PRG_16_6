@@ -19,3 +19,9 @@
 .question{
     background-color: antiquewhite;
 }
+.answer{
+    width: 50px;
+    background-color: antiquewhite;
+    border-radius: 20px;
+    margin-right: 20px;
+}

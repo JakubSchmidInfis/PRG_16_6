@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech&display=swap');
+
+#button{
+    border-radius: 20px;
+    background-color: aqua;
+    text-align: center;
+    height: 50px;
+    width: 200px;
+    box-shadow: 1px 1px 5px black;
+    border: none;
+    transition: 0.5s background-color;
+    font-family: Share Tech;
+    font-size: 30px;
+}
+#button:hover{
+    background-color: red;
+}

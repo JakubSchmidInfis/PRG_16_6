@@ -91,7 +91,7 @@ const json = [
     },
     {
         "question": "Který z těchto zápisů je pole?",
-        "answers": "(1, 2, 3)|{1, 2, 3}|<1, 2, 3>|[1, 2, 3]|1|2|3|Array(1,2,3)",
+        "answers": "(1, 2, 3)|{1, 2, 3}|<1, 2, 3>|[1, 2, 3]|1|Array(1,2,3)",
         "correct": "3"
     },
     {
@@ -205,7 +205,7 @@ function writeAnswer(text){
         garbage.push(questionNumText)
 }
 function changeButton(){
-    if(questionNum < maxQuestions)
+    if(questionNum < maxQuestions -1)
     {
        button.textContent = "Next" 
     }
@@ -214,7 +214,6 @@ function changeButton(){
     }
     else{
         button.remove()
-        alert(body + "/" + maxQuestions);
     }
 }
 function Clear(){

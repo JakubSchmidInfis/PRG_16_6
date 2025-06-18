@@ -1,6 +1,7 @@
 const answerDiv = document.getElementById("answerDiv")
 const questionDiv = document.getElementById("questionDiv")
 const nextButton = document.getElementById("button")
+const nevimDiv = document.getElementById("nevimDiv")
 
 const json = [
     {
@@ -113,7 +114,7 @@ var garbage = []
 var radios = []
 var questionNum = 0;
 var body = 0;
-var maxQuestions = json.length;
+var maxQuestions = (json.length/2);
 
 
 
@@ -189,11 +190,19 @@ function writeAnswer(text){
         answerDiv.append(answerDivDiv)
         answerDivDiv.append(answerItem)
         answerDivDiv.append(answerLabel)
+        
 
         garbage.push(answerDivDiv)
         garbage.push(answerItem)
         garbage.push(answerLabel)
+       
     }
+        
+        const questionNumText = document.createElement("h4")
+        questionNumText.textContent = (questionNum + "/" + maxQuestions)
+        questionNumText.classList.add("question")
+        nevimDiv.append(questionNumText)
+        garbage.push(questionNumText)
 }
 function changeButton(){
     if(questionNum < maxQuestions)

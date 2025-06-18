@@ -3,48 +3,155 @@ const questionDiv = document.getElementById("questionDiv")
 const nextButton = document.getElementById("button")
 
 const json = [
-{
-    "question": "Kolik je 1 + 1? ; 2,5,4,3,5,6"
-},
-{
-    "question": "Jaký je smysl života? ; Skibidi toilet, TikTok, Rainbow Siege (se)X, Helldivers II, I hate the Juice, Adolf Heatler"
-},
-{
-    "question": "Gedagedigedagedageooooo? ; Ajv Bín meríd lonk tajm agou,Pneumonoultramicroscopicislilcovolcanoconiosis",
-},
-{
-    "question": "Meatball! ; Who's ball?, Hi ball!",
-}
+    {
+        "question": "Jaký typ výstupu vrátí `console.log(5 + 5)`?",
+        "answers": "text|boolean|nic|číslo|seznam|undefined",
+        "correct": "3"
+    },
+    {
+        "question": "Jak vytvoříš proměnnou, kterou nelze znovu přiřadit?",
+        "answers": "let|var|static|const|class|function",
+        "correct": "3"
+    },
+    {
+        "question": "Co dělá '===' v JavaScriptu?",
+        "answers": "Vymaže proměnnou|Spustí funkci|Změní typ|Porovná jen hodnoty|Porovná hodnoty i typy|Duplicituje objekt",
+        "correct": "4"
+    },
+    {
+        "question": "Které z těchto není datový typ v JavaScriptu?",
+        "answers": "boolean|element|number|string|undefined|symbol",
+        "correct": "1"
+    },
+    {
+        "question": "Co dělá `.length` u textu?",
+        "answers": "Změní barvu|Vykreslí okno|Smaže text|Zjistí počet písmen|Zvětší text|Přeloží text",
+        "correct": "3"
+    },
+    {
+        "question": "Jak začíná komentář na jeden řádek?",
+        "answers": "/*|#|//|<!--|**|//--",
+        "correct": "2"
+    },
+    {
+        "question": "Který z těchto symbolů se používá pro sčítání?",
+        "answers": "*|=|%|!|+|-",
+        "correct": "4"
+    },
+    {
+        "question": "Jak se spustí výpis na konzoli?",
+        "answers": "show.print|output.show|console.log|write.log|document.alert|terminal.push",
+        "correct": "2"
+    },
+    {
+        "question": "Které slovo použiješ pro vytvoření funkce?",
+        "answers": "function|define|method|funct|create|prog",
+        "correct": "0"
+    },
+    {
+        "question": "Co vypíše `console.log(\"Hello\" + \" World\")`?",
+        "answers": "Hello + World|Hello World|Hello|\"Hello\" \"World\"|HelloWorld|Error",
+        "correct": "1"
+    },
+    {
+        "question": "K čemu slouží `if` v JavaScriptu?",
+        "answers": "Import|Začátek souboru|Nastavení barev|Podmínka|Konec funkce|Pro vypnutí zvuku",
+        "correct": "3"
+    },
+    {
+        "question": "Co udělá `alert(\"Ahoj!\")`?",
+        "answers": "Zobrazí okno s textem|Vytiskne dokument|Vymaže proměnnou|Překreslí stránku|Změní jazyk|Nic",
+        "correct": "0"
+    },
+    {
+        "question": "Jaká je hodnota `true && false`?",
+        "answers": "true|0|chyba|null|false|undefined",
+        "correct": "4"
+    },
+    {
+        "question": "Jaký je výstup `typeof \"text\"`?",
+        "answers": "boolean|string|object|undefined|null|function",
+        "correct": "1"
+    },
+    {
+        "question": "Co znamená `NaN`?",
+        "answers": "Null and Null|New as Null|Národní Automatický Nápovědník|Nothing as Name|Not a Number|Next as Number",
+        "correct": "4"
+    },
+    {
+        "question": "Jaký je výstup `3 * 2 + 1`?",
+        "answers": "9|7|6|5|1|8",
+        "correct": "1"
+    },
+    {
+        "question": "Jaký je výstup `10 % 3`?",
+        "answers": "0|NaN|10|3|7|1",
+        "correct": "5"
+    },
+    {
+        "question": "Který z těchto zápisů je pole?",
+        "answers": "(1, 2, 3)|{1, 2, 3}|<1, 2, 3>|[1, 2, 3]|1|2|3|Array(1,2,3)",
+        "correct": "3"
+    },
+    {
+        "question": "Co udělá `let x = 5; x++;`?",
+        "answers": "Změní x na string|Sníží x na 4|Zvýší x na 6|Vymaže x|Nic|Nastaví x na 0",
+        "correct": "2"
+    },
+    {
+        "question": "Jaký je výstup `Boolean(0)`?",
+        "answers": "undefined|true|error|null|0|false",
+        "correct": "5"
+    }
 ]
 
-var garbage = []
 
-var question = 0;
+
+
+
+var garbage = []
+var radios = []
+var questionNum = 0;
+var body = 0;
 var maxQuestions = json.length;
 
+
+
 function nextQuestion(){
-    Clear()
-    changeButton()
-    question ++;
-
-    //Assign
-    text = chooseQuestion().split(";")
-    questionText = text[0]
-    answerText = text[1]
-
-    //Cleanup
-    answerText = answerText.trim();
-    questionText = questionText.trim();
+    //Zhodnocení
+    if (questionNum > 0){
+        if(checkQuestion(correct) == true){
+        body ++;
+        }
+    }
 
     //Clear
+    Clear()
+    changeButton()
+    questionNum ++;
+
+    //Assign
+    jsonQuestion = chooseQuestion() //Vybere jednu z otázek
+    questionText = jsonQuestion.question
+    answerText = jsonQuestion.answers
+    correct = jsonQuestion.correct
+
+    correct = Number(correct)
+    
+    
+    if(questionNum <= (maxQuestions))
+    {
+        //Přidat nové elementy do dokumentu
+        writeQuestion(questionText);
+        writeAnswer(answerText);
+    }
+    else{
+        End()
+    }
+    
     
 
-    //Přidat elementy do dokumentu
-    writeQuestion(questionText);
-    writeAnswer(answerText);
-
 }
-
 function writeQuestion(text){
     const questionItem = document.createElement("h3")
     questionItem.textContent = text
@@ -53,17 +160,16 @@ function writeQuestion(text){
 
     garbage.push(questionItem)
 }
-
-
 function writeAnswer(text){
 
-    let Answers = text.split(",")
+    let Answers = text.split("|")
 
     for (i = 0;i<Answers.length;i++)
     {
         const answerItem = document.createElement("input")
         const answerDivDiv = document.createElement("div")
         const answerLabel = document.createElement("label")
+
         
         
 
@@ -76,6 +182,8 @@ function writeAnswer(text){
         answerItem.setAttribute("name", "answer")
         answerLabel.textContent = Answers[i]
         answerItem.classList.add("answer")
+        answerItem.value = "off"
+        radios.push(answerItem)
 
         //appending
         answerDiv.append(answerDivDiv)
@@ -87,32 +195,50 @@ function writeAnswer(text){
         garbage.push(answerLabel)
     }
 }
-
 function changeButton(){
-    if(question < maxQuestions)
+    if(questionNum < maxQuestions)
     {
        button.textContent = "Next" 
     }
-    else{
+    else if(questionNum == maxQuestions -1){
         button.textContent = "Finish"
     }
+    else{
+        button.remove()
+        alert(body + "/" + maxQuestions);
+    }
 }
-
 function Clear(){
     for (i=0;i<garbage.length;i++){
         garbage[i].remove()
         
     }
+    radios = []
     garbage = []
 }
-
-    const quests = ["Kolik je 1 + 1? ; 2,5,4,3,5,6", "Kolik je 5 + 4? ; 9,5,4,3,5,6"]
-
 function chooseQuestion(){
     
 
-    //let random = (ceil(Math.random() *10)-9 * quests.length)
-    return(json[Math.round(Math.random() * (json.length-1))]).question;
+    return(json[Math.round(Math.random() * (json.length-1))]);
     //Credit Motlíkovi za pomoc!!
 }
+function checkQuestion(correct)
+{
+    if(radios[correct].checked == true)
+    {
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+function End()
+{
+    mainText = document.createElement("h1")
+    mainText.textContent = ("Skóroval jsi " + body + " bodů ze " + maxQuestions)
+    mainText.classList.add("results")
+    answerDiv.append(mainText)
+}
+
 
